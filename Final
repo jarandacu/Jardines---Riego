@@ -1,5 +1,12 @@
 #include <Time.h>
 #include <TimeAlarms.h>
+/*
+RST = 5;
+DAT = 6;
+CLK = 7;
+
+*/
+
 
 //ZONAS DE RIEGO
 /*
@@ -11,16 +18,16 @@ C) 8 chupeas riego diario
 D) 2 boj riego diario poca agua*/
 
 //Zona 1 - Riego frutales c/2 días inundación.
-const int pin1 = 1; //Pin conectado al arduino
+const int pin1 = 8; //Pin conectado al arduino
 const int tiz1[3]={21,00,55}; //Hora de riego
 const int tz1 = 10*1000; //Tiempo de riego
-int cont1=0;
+int cont1=1;
 
 //Zona 2  - Riego c/2 días.
 const int pin2 = 2; //Pin conectado al arduino
 const int tiz2[3]={21,00,40}; //Hora de riego
 const int tz2 = 10*1000; //Tiempo de riego
-int cont2=0;
+int cont2=1;
 
 //Zona 1 - Riego diario.
 const int pin3 = 3; //Pin conectado al arduino
@@ -87,23 +94,27 @@ void printDigits(int digits)
 }
 
 void z1(){
+  cont1=cont1+1;
+  Serial.println("Entrar z1");
   if (cont1%2==0){
   Serial.println("Riego Zona 1");
    digitalWrite(pin1,LOW);
    delay(tz1);
    digitalWrite(pin1,HIGH);
-   Serial.println("Término Riego Zona 1");}
-   cont1=+1;
+   Serial.println("Término Riego Zona 1");}   
+   Serial.println("Salir z1");
   }
 
   void z2(){
-    if (cont2%2==0){
-  Serial.println("Riego Zona 2");
+   cont2=cont2+1;
+   Serial.println("Entrar z2");
+   if (cont2%2==0){
+   Serial.println("Riego Zona 2");
    digitalWrite(pin2,LOW);
    delay(tz2);
    digitalWrite(pin2,HIGH);
    Serial.println("Término Riego Zona 2");}
-   cont2=+1;
+   Serial.println("Salir z2");
   }
 
 
